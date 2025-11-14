@@ -11,11 +11,11 @@ const CartItem = ({ onContinueShopping }) => {
     const calculateTotalAmount = () => {
         let total = 0;
         cart.forEach((item) => {
-            const quantity = item.quantity;
-            const cost = parseFloat(item.cost.substring(1));
-            total += quantity * cost;
+            // Extract numeric value from cost string (e.g., "$10.00" -> 10.00)
+            const costValue = parseFloat(item.cost.substring(1));
+            total += costValue * item.quantity;
         });
-        return total;
+        return total.toFixed(2); //Return with 2 decimal places
     };
 
     const handleCheckoutShopping = (e) => {
@@ -74,7 +74,7 @@ const CartItem = ({ onContinueShopping }) => {
             <div className="continue_shopping_btn">
                 <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
                 <br />
-                <button className="get-started-button1">Checkout</button>
+                <button className="get-started-button1" onClick={handleCheckoutShopping}>Checkout</button>
             </div>
         </div>
     );
